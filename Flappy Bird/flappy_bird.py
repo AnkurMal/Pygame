@@ -15,7 +15,7 @@ bird_image = pygame.image.load("images/flappy_bird.png").convert_alpha()
 pygame.display.set_icon(bird_image)
 
 game_active = True
-score = bird_gravity = 0
+score = bird_gravity = highest_score = 0
 timer = pygame.time.get_ticks()    
 
 font1 = pygame.font.Font('font/flappy-font.ttf', 60)  
@@ -136,10 +136,13 @@ while True:
             hit_sound.play()
             screen.fill((51, 165, 255))
             game_active = False
-        
+            if highest_score < score:
+                highest_score = score
+
     else:
         screen.blit(font2.render(f'Score: {score}', False, 'white'), (150, 30))
-        screen.blit(font2.render('Press space to continue...', False, 'white'), (30, 170))
+        screen.blit(font2.render(f'Highest Score: {highest_score}', False, 'white'), (90, 70))
+        screen.blit(font2.render('Press space to continue...', False, 'white'), (30, 200))
     
     pygame.display.update()
     clock.tick(60)
